@@ -25,7 +25,8 @@ config :schools_api, SchoolsApiWeb.Endpoint,
   secret_key_base: "2G5d3sCrIacs/y5IkH9RmFk+pYwb2Sm+nGJG4T07CL1flVEAcQXH5aad1khGHisb",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    # esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    node: ["esbuild.js", "--watch", cd: Path.expand("../assets", __DIR__)]
   ]
 
 # ## SSL Support
