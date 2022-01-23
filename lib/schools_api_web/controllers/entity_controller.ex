@@ -13,6 +13,7 @@ defmodule SchoolsApiWeb.EntityController do
 
   def create(conn, %{"entity" => entity_params}) do
     with {:ok, %Entity{} = entity} <- Partners.create_entity(entity_params) do
+      
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.entity_path(conn, :show, entity))
@@ -40,4 +41,18 @@ defmodule SchoolsApiWeb.EntityController do
       send_resp(conn, :no_content, "")
     end
   end
+
+
+  # def fetch(_topic, presences) do
+  #   query =
+  #     from u in User,
+  #       where: u.id in ^Map.keys(presences),
+  #       select: {u.id, u}
+  
+  #   users = query |> Repo.all() |> Enum.into(%{})
+  #   for {key, %{metas: metas}} <- presences, into: %{} do
+  #     {key, %{metas: metas, user: users[key]}}
+  #   end
+  # end
+  
 end

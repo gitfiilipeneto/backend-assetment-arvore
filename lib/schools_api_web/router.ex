@@ -27,12 +27,13 @@ defmodule SchoolsApiWeb.Router do
  
     resources "/partners/entities", EntityController
 
-    post "/partners/entities", SchoolsApiWeb.EntityController, :create
-
     get "/partners/entities", SchoolsApiWeb.EntityController, :index
-
+    
     get "/api/partners/entities/:id", SchoolsApiWeb.EntityController, :show
-
+    
+    post "/partners/entities", SchoolsApiWeb.EntityController, :create
+    
+    put "/api/partners/entities/:id", SchoolsApiWeb.EntityController, :update
   end
 
   # Enables LiveDashboard only for development
