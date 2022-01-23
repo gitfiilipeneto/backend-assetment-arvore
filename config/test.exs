@@ -7,7 +7,7 @@ import Config
 # Run `mix help test` for more information.
 config :schools_api, SchoolsApi.Repo,
   username: "root",
-  password: "",
+  password: "22800Filipe#",
   hostname: "localhost",
   database: "schools_api_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,

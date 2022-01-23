@@ -13,17 +13,20 @@ defmodule SchoolsApiWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
-
+  
   scope "/", SchoolsApiWeb do
     pipe_through :browser
-
+    
     get "/", PageController, :index
-  end
 
+  end
+  
   # Other scopes may use custom stacks.
-  # scope "/api", SchoolsApiWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", SchoolsApiWeb do
+    pipe_through :api
+ 
+    resources "/entities", EntityController, except: [:new, :edit]
+  end
 
   # Enables LiveDashboard only for development
   #
