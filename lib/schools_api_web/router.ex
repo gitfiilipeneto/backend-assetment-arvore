@@ -25,7 +25,14 @@ defmodule SchoolsApiWeb.Router do
   scope "/api", SchoolsApiWeb do
     pipe_through :api
  
-    resources "/entities", EntityController, except: [:new, :edit]
+    resources "/partners/entities", EntityController
+
+    post "/partners/entities", SchoolsApiWeb.EntityController, :create
+
+    get "/partners/entities", SchoolsApiWeb.EntityController, :index
+
+    get "/api/partners/entities/:id", SchoolsApiWeb.EntityController, :show
+
   end
 
   # Enables LiveDashboard only for development
