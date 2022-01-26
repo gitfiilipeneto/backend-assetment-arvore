@@ -112,6 +112,7 @@ Execute o comando:
 `systemctl status mysql.service`
 
 deverá aparecer uma tela como essa: 
+
 ![image](https://user-images.githubusercontent.com/59828761/151059519-44271b2f-e428-4a7d-aaac-6eb3e5231f05.png)
 
 Se o MySQL não estiver funcionando, inicie-o com o comando:
@@ -247,13 +248,3 @@ PUT no endpoint http://localhost:4000/api/partners/entities/2 com o body exatame
 
 ![image](https://user-images.githubusercontent.com/59828761/151083191-05c52c38-81d3-4fa3-81a3-694801f106c7.png)
 
-<!-- 
-## Visualizando o Banco de Dados com o DBeaver
-
-Inicie o debeaver e na aba -->
-
-
-
-
-
- 
