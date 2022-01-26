@@ -248,3 +248,6 @@ PUT no endpoint http://localhost:4000/api/partners/entities/2 com o body exatame
 
 ![image](https://user-images.githubusercontent.com/59828761/151083191-05c52c38-81d3-4fa3-81a3-694801f106c7.png)
 
+## Rodando testes
+
+Digite o comando `mix test` para ver os resultados dos testes.
