@@ -19,7 +19,7 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Source: https://github.com/phoenixframework/phoenix
 # backend-assetment-arvore -->
 
-# backend-assetment-arvore -- backend-assetment-arvore
+# backend-assetment-arvore 
  
 Construir uma API usando Phoenix (elixir) e banco de dados MySQL visando permitir a um parceiro da Árvore replicar a sua estrutura de Redes, Escolas, Turmas e administrá-la conforme necessário.
 
@@ -118,4 +118,142 @@ Se o MySQL não estiver funcionando, inicie-o com o comando:
 
 `sudo systemctl start mysql`
 
+## Visualizando o Banco de dados com alguma ferramenta de banco de dados a sua escolha:
 
+### Nesse exemplo vai ser usando o DBeaver Community Edition.
+
+Instalando o DBeaver
+
+#### macOS
+Usando o Brew, no terminal digite:
+
+`brew install --cask dbeaver-community`
+
+#### Linux
+
+Usando o snap, no terminal digite:
+
+`sudo snap install dbeaver-ce`
+
+
+## Clonando o repositório e executando o projeto:
+	
+no terminal, clone o repositório com o comando: 
+
+`git clone https://github.com/gitfiilipeneto/backend-assetment-arvore.git`
+
+você verá uma tela como essa:
+
+![image](https://user-images.githubusercontent.com/59828761/151080040-30d114d8-b4b3-4e4b-b711-a377ff5b86a1.png)
+
+
+Navegue até a pasta do repositorio clonado:
+
+`cd backend-assetment-arvore`
+
+e inicie o projeto usando alguma IDE de sua escolha, nesse exemplo usando o VScode vamos só iniciar o projeto dentro da pasta com o seguinte comando:
+`code .`
+
+a essa altura você ja deve estar vendo a estrutura do projeto:
+
+![image](https://user-images.githubusercontent.com/59828761/151080214-4a91f496-2077-4deb-ae21-bdbfca425851.png)
+
+## Criando o Banco de dados, instalando as dependencias e executando o projeto
+
+Habilite o terminal dentro do Vscode, no menu superior na aba "Terminal" -> "new terminal"
+
+instale as dependencias com o comando:
+
+`mix deps.get`
+
+Irá aparecer uma tela similar a essa:
+
+![image](https://user-images.githubusercontent.com/59828761/151080871-7f4601d3-5ce0-4371-8d22-14498b00d3f1.png)
+![image](https://user-images.githubusercontent.com/59828761/151080899-720b5469-f6b3-4206-9dd1-2e9b4d903d7d.png)
+
+Execute o comando para criar o banco de dados:
+
+`mix ecto.setup`
+
+esse comando vai criar um banco mysql e ja popular ele com algumas amostras de exemplo que estão no arquivo /priv/repo/seeds.exs ao finalizar se estiver tudo certo até aqui, verá essas informações no terminal:
+
+![image](https://user-images.githubusercontent.com/59828761/151081266-9dd5f327-7df5-4daa-b82a-ab8b805f61c8.png)
+
+Você pode verificar o seu banco de dados no terminal do mysql com os seguintes comandos:
+
+`mysql -u root -p` 
+
+as flags -u e -p indicam respectivamente user e password e a senha vai ser a que você definiu na hora de instalar o mysql, digite a senha e quando entrar no termimal mysql digite:
+
+`mysql SHOW DATABASES;`
+
+(não esquece do ";" se não não funciona!!!)
+
+Você verá o banco de dados de desenvolvimento schools_api_dev:
+
+
+![image](https://user-images.githubusercontent.com/59828761/151081644-bb3cd8c6-c420-4677-8696-c68fa09055a4.png)
+
+
+## Iniciando o servidor com o Phoenix
+
+Inicie um servidor com o comando: `mix phx.server`
+
+Se aparecer uma tela parecida com essa então o server do phoenix ja está rodando!! YAY!!!
+
+![image](https://user-images.githubusercontent.com/59828761/151081804-b7d0549e-7bdb-4ad4-ad5a-79e396d82d1d.png)
+
+No seu navegador vá para o endereço http://localhost:4000 e vai aparecer a seguinte tela:
+
+![image](https://user-images.githubusercontent.com/59828761/151081959-9a72052e-4791-45ab-820d-e966ef696de6.png)
+
+Uma vez com isso em mãos já podemos, de maneira local, trabalhar com a aplicação!
+
+## Métodos alocados e exemplos de requisição
+
+Usando alguma "API design platform" de sua escolha(postman, insomnia, thunderclient) podemos começar a usar as seguintes requisições para a nossa API:
+
+nesse exemplo estou usando o Thunder Client - extensão do VScode para demonstrar os métodos e suas respostas.
+
+O método GET no endpoint http://localhost:4000/api/partners/entities/ nos retorna todas as entradas disponiveis no banco recém criado:
+
+![image](https://user-images.githubusercontent.com/59828761/151082395-90d3e101-a712-4ef3-b98a-702628451a54.png)
+
+O método GET no endpoint http://localhost:4000/api/partners/entities/:id  onde :id deve ser um index do banco, retorna especificamente a resposta desse id.
+
+ex: GET no endpoint http://localhost:4000/api/partners/entities/2  retorna o resultado de id 2 no banco.
+
+![image](https://user-images.githubusercontent.com/59828761/151082571-229f7270-3ed3-4372-98d6-0cef6a13bd01.png)
+
+O método POST no endpoint http://localhost:4000/api/partners/entities/ nos permite criar entradas nos bancos de dados, para isso devemos enviar no bdy da requisição os dados da entitie que queremos no seguinte formato:
+
+{"entity":{
+  "name": "Escola Exemplo criada com o post",
+  "entity_type": "school",
+  "inep": "123455556",
+  "parent_id": null
+}
+}
+
+ao executar o POST com esses parametros a resposta deve ser:
+
+![image](https://user-images.githubusercontent.com/59828761/151082911-7347dffd-9044-49ff-82a7-3529d8df26a9.png)
+
+O método PUT no endpoint http://localhost:4000/api/partners/entities/:id  onde :id deve ser um index do banco, nos permite editar os valores desse id, esse método também precisa que seja enviado no body quais valores vamos editar.
+
+ex:
+
+PUT no endpoint http://localhost:4000/api/partners/entities/2 com o body exatamente igual ao do metodo POST acima, nos retorna:
+
+![image](https://user-images.githubusercontent.com/59828761/151083191-05c52c38-81d3-4fa3-81a3-694801f106c7.png)
+
+<!-- 
+## Visualizando o Banco de Dados com o DBeaver
+
+Inicie o debeaver e na aba -->
+
+
+
+
+
+ 
